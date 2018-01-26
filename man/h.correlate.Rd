@@ -13,7 +13,7 @@ h.correlate(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
 
 \item{verbose}{enable n and p values reporting, TRUE or FALSE}
 
-\item{filter.by.p}{}
+\item{filter.by.p}{Do you want to filter for significant p values?}
 }
 \description{
 This function calculates correlations between variables
@@ -21,4 +21,3 @@ This function calculates correlations between variables
 \examples{
 #need 4 column data frame, iso3c, variablename, year, value
 }
-\keyword{correlate}

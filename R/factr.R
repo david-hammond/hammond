@@ -3,10 +3,7 @@
 #' This makes a factor out of an ordered array
 #'
 #' @param x array to factorise
-#'
-#' @examples load <- factr(x)
-#'
-#' @keywords formatting
+#' @param y order of factors
 #'
 #' @export
 

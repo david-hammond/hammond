@@ -8,8 +8,6 @@
 #' @return Returns a dataframe containing the raw and annual growths in GPI
 #' for each country
 #'
-#' @examples
-#' change <- iep.pc.change(df)
 #'
 #' @keywords utilities analysis-utils
 #'
@@ -17,6 +15,8 @@
 
 h.pc.change <- function(all) {
   ipak('scales')
+  all$year = as.numeric(all$year)
+  all$value = as.numeric(all$value)
   temp <- expand.grid(iso3c = unique(all$iso3c), variablename = unique(all$variablename),
                       from = unique(all$year), to = unique(all$year))
   temp$num.years <- as.numeric(temp$to) - as.numeric(temp$from)

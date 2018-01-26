@@ -12,7 +12,3 @@ create.package.manual(pack = "hammond")
 \description{
 This function calculates combinations for efficient correlation calculations
 }
-\examples{
-create.package.manual("hammond")
-
-}

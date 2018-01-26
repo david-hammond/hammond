@@ -4,13 +4,12 @@
 \alias{ipak}
 \title{install dependencies}
 \usage{
-ipak(pkg.name)
+ipak(pkg)
+}
+\arguments{
+\item{pkg}{a string or list of packages to install}
 }
 \description{
 easy install for R packages, sourced from
 https://gist.github.com/stevenworthington/3178163
-}
-\examples{
-ipak("tidyverse")
-
 }

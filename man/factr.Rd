@@ -8,12 +8,9 @@ factr(x, y = unique(x))
 }
 \arguments{
 \item{x}{array to factorise}
+
+\item{y}{order of factors}
 }
 \description{
 This makes a factor out of an ordered array
 }
-\examples{
-load <- factr(x)
-
-}
-\keyword{formatting}

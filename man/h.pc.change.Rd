@@ -17,9 +17,5 @@ for each country
 This function calculates proportional change in GPI for a country
 from one year to another.
 }
-\examples{
-change <- iep.pc.change(df)
-
-}
 \keyword{analysis-utils}
 \keyword{utilities}

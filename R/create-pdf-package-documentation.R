@@ -4,7 +4,6 @@
 #'
 #' @param pack name of package
 #'
-#' @examples create.package.manual("hammond")
 #'
 #' @export
 

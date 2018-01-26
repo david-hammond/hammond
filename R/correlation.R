@@ -5,19 +5,16 @@
 #' @param df name of dataframe to use for correlation, needs to be long format 4 column data frame: iso3c, variablename, year, value
 #' @param min.pairs minimum number of pairs to correlate
 #' @param verbose enable n and p values reporting, TRUE or FALSE
-#' @param filter.by.p
+#' @param filter.by.p Do you want to filter for significant p values?
 #'
 #' @examples
 #' #need 4 column data frame, iso3c, variablename, year, value
-#' @keywords correlate
-#'
+#' @import Hmisc,dplyr,reshape2
 #' @export
 
 h.correlate <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
-  options(warn = -1)
-  ipak(c("Hmisc", "tidyverse", "reshape2"))
   df = df %>% group_by(iso3c, variablename) %>%
-    dplyr::filter(year == max(year)) %>% ungroup()
+    filter(year == max(year)) %>% ungroup()
   df1 = dcast(df, variablename~iso3c, value.var = "value", length)
   variablename = as.character(df1[,1])
   df = dcast(df, iso3c~variablename, value.var = "value", mean)
@@ -73,6 +70,6 @@ h.correlate <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
   pos = match(df$variable, variablename2)
   df$variable = variablename[pos]
   df = iep.round(df)
-  df = df %>% dplyr::rename(var1 = variablename, var2 = variable)
+  df = df %>% rename(var1 = variablename, var2 = variable)
   df
 }
