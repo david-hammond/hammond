@@ -10,9 +10,11 @@
 
 hproject = function(){
   require(ProjectTemplate)
-  create.project("tmp", minimal = T)
-  file.copy(from="tmp", to=".",
+  mydir = "tmp86402tmp"
+  create.project(mydir, minimal = T)
+  file.copy(from=list.dirs(mydir, full.names = T, recursive = T),
+            to=getwd(),
             overwrite = TRUE, recursive = TRUE,
             copy.mode = TRUE)
-  file.remove(tmp)
+  unlink(mydir, recursive=TRUE)
 }
