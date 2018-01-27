@@ -1,4 +1,4 @@
-#' hcorrelate
+#' hcorr
 #'
 #' This function calculates correlations between variables
 #'
@@ -9,12 +9,15 @@
 #'
 #' @examples
 #' #need 4 column data frame, iso3c, variablename, year, value
-#' @import Hmisc,dplyr,reshape2
+#'
+#' @import Hmisc
+#' @import dplyr
+#' @import reshape2
 #' @export
 
-h.correlate <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
-  df = df %>% group_by(iso3c, variablename) %>%
-    filter(year == max(year)) %>% ungroup()
+hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
+  df = df %>% dplyr::group_by(iso3c, variablename) %>%
+    dplyr::filter(year == max(year)) %>% ungroup()
   df1 = dcast(df, variablename~iso3c, value.var = "value", length)
   variablename = as.character(df1[,1])
   df = dcast(df, iso3c~variablename, value.var = "value", mean)
@@ -28,7 +31,7 @@ h.correlate <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
   df[pos] = NA
 
   #####A difference occurs because of non GPI countries
-  cormatrix = rcorr(df, type = "pearson")
+  cormatrix = Hmisc::rcorr(df, type = "pearson")
   cormatrix$r[cormatrix$n<=min.pairs] = NA
 
   if (filter.by.p) {
@@ -69,7 +72,6 @@ h.correlate <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
   }
   pos = match(df$variable, variablename2)
   df$variable = variablename[pos]
-  df = iep.round(df)
-  df = df %>% rename(var1 = variablename, var2 = variable)
+  df = df %>% dplyr::rename(var1 = variablename, var2 = variable)
   df
 }

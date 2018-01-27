@@ -4,10 +4,10 @@
 #'
 #' @param pack name of package
 #'
-#'
+#' @import devtools
 #' @export
 
-create.package.manual <- function(pack="hammond") {
+hpack.manual <- function(pack="hammond") {
   devtools::document()
   path <- find.package(pack)
   if (file.exists(file.path(getwd(), paste0(pack, '.pdf')))) {

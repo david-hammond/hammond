@@ -20,4 +20,5 @@ This function calculates correlations between variables
 }
 \examples{
 #need 4 column data frame, iso3c, variablename, year, value
+
 }

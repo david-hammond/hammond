@@ -13,7 +13,7 @@
 #'
 #' @export
 
-h.pc.change <- function(all) {
+hpc.change <- function(all) {
   ipak('scales')
   all$year = as.numeric(all$year)
   all$value = as.numeric(all$value)
@@ -27,10 +27,7 @@ h.pc.change <- function(all) {
   names(all) <- c("iso3c", "to" , "variablename", "to.value")
   temp <- merge(temp, all)
   temp$raw.proportional.change <- round(with(temp, (to.value-from.value)/from.value),3)
-  #temp$raw.growth = percent(temp$raw.proportional.change)
   temp$annual.proportional.change <- round(with(temp, ((to.value/from.value)^(1/num.years))-1),3)
-  #temp$annual.growth = percent(temp$annual.proportional.change)
-  #temp$country = iep.gpi.country.spelling(temp$iso3c)
   temp <- temp[, c("iso3c", "variablename", "num.years", "from",
                    "from.value", "to", "to.value", "raw.proportional.change",
                    "annual.proportional.change") ]

@@ -7,6 +7,6 @@
 #'
 #' @export
 
-factr <- function(x, y = unique(x)) {
+hfactor <- function(x, y = unique(x)) {
   factor(x, levels = y, ordered = T)
 }
