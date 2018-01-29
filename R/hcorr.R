@@ -16,6 +16,9 @@
 #' @export
 
 hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
+  require(Hmisc)
+  require(reshape2)
+  require(dplyr)
   df = df %>% dplyr::group_by(iso3c, variablename) %>%
     dplyr::filter(year == max(year)) %>% ungroup()
   df1 = dcast(df, variablename~iso3c, value.var = "value", length)
