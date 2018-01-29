@@ -26,16 +26,15 @@ hpc.change <- function(all) {
   temp <- merge(temp, all)
   names(all) <- c("iso3c", "to" , "variablename", "to.value")
   temp <- merge(temp, all)
+  temp$absolute.diff = round(with(temp, (to.value-from.value)),3)
   temp$raw.proportional.change <- round(with(temp, (to.value-from.value)/from.value),3)
   temp$annual.proportional.change <- round(with(temp, ((to.value/from.value)^(1/num.years))-1),3)
   temp <- temp[, c("iso3c", "variablename", "num.years", "from",
                    "from.value", "to", "to.value", "raw.proportional.change",
                    "annual.proportional.change") ]
   names(temp) <- c("iso3c", "variablename", "num.years", "from",
-                   "from.value", "to", "to.value", "prop.growth",
+                   "from.value", "to", "to.value", "absolute.diff", "prop.growth",
                    "annual.prop.growth")
-  temp$pc.growth = percent(temp$prop.growth)
-  temp$annual.pc.growth = percent(temp$annual.prop.growth)
   temp$iso3c = as.character(temp$iso3c)
   temp$variablename = as.character(temp$variablename)
   return(temp)
