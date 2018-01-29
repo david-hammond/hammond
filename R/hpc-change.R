@@ -30,7 +30,7 @@ hpc.change <- function(all) {
   temp$raw.proportional.change <- round(with(temp, (to.value-from.value)/from.value),3)
   temp$annual.proportional.change <- round(with(temp, ((to.value/from.value)^(1/num.years))-1),3)
   temp <- temp[, c("iso3c", "variablename", "num.years", "from",
-                   "from.value", "to", "to.value", "raw.proportional.change",
+                   "from.value", "to", "to.value", "absolute.diff", "raw.proportional.change",
                    "annual.proportional.change") ]
   names(temp) <- c("iso3c", "variablename", "num.years", "from",
                    "from.value", "to", "to.value", "absolute.diff", "prop.growth",
