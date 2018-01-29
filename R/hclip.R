@@ -9,6 +9,7 @@
 #' hclip(df)
 #'
 #' @keywords utilities internal review
+#' @export
 
 hclip <- function(obj, size = 4096) {
   clip <- paste("clipboard-", size, sep = "")
