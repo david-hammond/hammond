@@ -10,10 +10,8 @@
 #' @examples
 #' #need 4 column data frame, iso3c, variablename, year, value
 #'
-#' @import Hmisc
-#' @import dplyr
-#' @import reshape2
 #' @export
+
 
 hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
   require(Hmisc)

@@ -4,7 +4,7 @@
 \alias{hproject}
 \title{hcreate.project}
 \usage{
-hproject()
+hproject(dir = getwd())
 }
 \description{
 This function creates a minimal project folder structure

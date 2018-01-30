@@ -4,17 +4,10 @@
 #'
 #'
 #'
-#' @import ProjectTemplate
 #' @export
 #'
 
-hproject = function(){
-  require(ProjectTemplate)
-  mydir = "tmp86402tmp"
-  create.project(mydir, minimal = T)
-  file.copy(from=list.dirs(mydir, full.names = T, recursive = T),
-            to=getwd(),
-            overwrite = TRUE, recursive = TRUE,
-            copy.mode = TRUE)
-  unlink(mydir, recursive=TRUE)
+hproject = function(dir = getwd()){
+  paths = list.dirs(system.file("extdata", package = "hammond"))
+  file.copy(paths, dir, recursive = T)
 }
