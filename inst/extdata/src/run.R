@@ -1,5 +1,5 @@
 ###################################################################################
-# This id a modified version of ProjectTemplate
+# This is a modified version of ProjectTemplate
 # created by David Hammond 14 Feb 2018
 #
 # install pacman package if not already installed
