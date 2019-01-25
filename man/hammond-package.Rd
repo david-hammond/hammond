@@ -6,7 +6,7 @@
 \alias{hammond-package}
 \title{hammond: some stuff}
 \description{
-hammond: some stuff
+Just some useful stuff for me
 }
 \section{Installation}{
 
