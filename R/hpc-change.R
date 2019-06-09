@@ -13,7 +13,7 @@
 #'
 #' @export
 
-hpc.change <- function(all) {
+hpc_change <- function(all) {
   ipak('scales')
   all$year = as.numeric(all$year)
   all$value = as.numeric(all$value)
