@@ -9,9 +9,9 @@
 #'
 #' @export
 hdb_connect = function(db = "postgres",
-                       host,
                        port = 5432,
                        user = "postgres",
+                       host,
                        password){
   require(RPostgreSQL)
   if(is.null(host)){
@@ -37,7 +37,7 @@ hdb_connect = function(db = "postgres",
 #'
 #' @export
 hdb_get_toc = function(db = "master", host = NULL, password = NULL){
-  con <- hdb_connect(db, host, password)
+  con <- hdb_connect(db, host = host, password = password)
   key = dbReadTable(con, "key")
   dbDisconnect(con)
   return(key)
@@ -53,7 +53,7 @@ hdb_get_toc = function(db = "master", host = NULL, password = NULL){
 #'
 #' @export
 hdb_search = function(vars, db = "master", host = NULL, password = NULL){
-  con <- hdb_connect(db)
+  con <- hdb_connect(db, host = host, password = password)
   key = dbReadTable(con, "key")
   key = key[grep(tolower(vars), tolower(key$variablename)),]
   dbDisconnect(con)
@@ -72,9 +72,9 @@ hdb_search = function(vars, db = "master", host = NULL, password = NULL){
 hdb_get = function(vars, host = NULL, password = NULL){
   db.get = function(id){
     print(id)
-    key = hdb_get_toc(host, password)
+    key = hdb_get_toc(host = host, password = password)
     key = key %>% filter(variablename == id)
-    con <- hdb_connect(key$db[1], host, password)
+    con <- hdb_connect(key$db[1], host = host, password = password)
     tmp = dbReadTable(con, key$tablename[1])
     tmp = tmp %>% filter(seriescode == key$seriescode[1])
     tmp$value = as.numeric(tmp$value)
@@ -88,8 +88,8 @@ hdb_get = function(vars, host = NULL, password = NULL){
   tmp = pblapply(unique(vars), db.get)
   tmp = bind_rows(tmp)
   if("national" %in% tmp$geolevel){
-    tmp = hcountry_spelling(tmp, host = NULL, password = NULL)
-    tmp = hcountry_info(tmp, host = NULL, password = NULL)
+    tmp = hcountry_spelling(tmp, host = host, password = password)
+    tmp = hcountry_info(tmp, host = host, password = password)
   }
   return(tmp)
 }
@@ -104,7 +104,7 @@ hdb_get = function(vars, host = NULL, password = NULL){
 #'
 #' @export
 hcountry_spelling = function(df, host = NULL, password = NULL){
-  con = hdb_connect("master", host, password)
+  con = hdb_connect("master", host = host, password = password)
   tmp = dbReadTable(con, "country_spelling")
   df = left_join(df, tmp)
   dbDisconnect(con)
@@ -121,7 +121,7 @@ hcountry_spelling = function(df, host = NULL, password = NULL){
 #'
 #' @export
 hcountry_info = function(df, host = NULL, password = NULL){
-  con = hdb_connect("master", host, password)
+  con = hdb_connect("master", host = host, password = password)
   tmp = dbReadTable(con, "country_info")
   df = left_join(df, tmp)
   dbDisconnect(con)
