@@ -33,10 +33,10 @@ hcountrycode = function(x)
     fname = "unmatched_country_codes.xlsx"
     if(file.exists(fname)){
       tmp = import(fname)
-      tmp = tmp %>% rbind(unmatched) %>%
+      unmatched = tmp %>% rbind(unmatched) %>%
         distinct()
     }
-    export(tmp, fname)
+    export(unmatched, fname)
   }else{
     message("All country names converted")
   }
