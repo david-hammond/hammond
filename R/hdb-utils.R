@@ -70,7 +70,7 @@ hdb_search = function(vars, db = "master", host = NULL, password = NULL){
 #'
 #' @export
 hdb_get = function(vars, host = NULL, password = NULL){
-  db.get = function(id){
+  db_get = function(id){
     print(id)
     key = hdb_get_toc(host = host, password = password)
     key = key %>% filter(variablename == id)
@@ -85,7 +85,7 @@ hdb_get = function(vars, host = NULL, password = NULL){
     dbDisconnect(con)
     return(tmp)
   }
-  tmp = pblapply(unique(vars), db.get)
+  tmp = pblapply(unique(vars), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }
