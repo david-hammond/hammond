@@ -9,11 +9,17 @@
 #'
 #' @export
 hdb_connect = function(db = "postgres",
-                       host = my.name <- readline(prompt="Enter database ip address: "),
+                       host,
                        port = 5432,
                        user = "postgres",
-                       password = my.name <- readline(prompt="Enter database password: ")){
+                       password){
   require(RPostgreSQL)
+  if(is.null(host)){
+    host = readline(prompt="Enter database ip address: ")
+  }
+  if(is.null(password)){
+    password = readline(prompt="Enter database password: ")
+  }
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv, dbname = db,
                    host = host, port = port,
