@@ -68,7 +68,7 @@ hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
       df$signif = ""
       df$signif[pos] = "***"
     } else {
-      df = sys.complete.cases(df)
+      df = df %>% filter(complete.cases(.))
     }
   }
   pos = match(df$variable, variablename2)
