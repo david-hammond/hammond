@@ -23,21 +23,22 @@ hcountrycode = function(x)
     y = countrycode(x, "country.name", "iso3c", warn = F)
     pos = is.na(y)
     y[pos] = countrycode(x[pos], 'country.name', 'wb', warn = F)
-  }
-  pos = is.na(y)
-  if(sum(pos) >= 1){
-    message("The following countries were not matched, please rename them in your data frame if you know they have an isocode")
-    message(paste(unique(x[pos]), collapse = ", "))
-    unmatched = data.frame(unmatched_countries = unique(x[pos]), script = sys.frame(1)$ofile)
-    fname = "unmatched_country_codes.xlsx"
-    if(file.exists(fname)){
-      tmp = import(fname)
-      unmatched = tmp %>% rbind(unmatched) %>%
-        distinct()
+    pos = is.na(y)
+    if(sum(pos) >= 1){
+      message("The following countries were not matched, please rename them in your data frame if you know they have an isocode")
+      message(paste(unique(x[pos]), collapse = ", "))
+      unmatched = data.frame(unmatched_countries = unique(x[pos]), script = sys.frame(1)$ofile)
+      fname = "unmatched_country_codes.xlsx"
+      if(file.exists(fname)){
+        tmp = import(fname)
+        unmatched = tmp %>% rbind(unmatched) %>%
+          distinct()
+      }
+      export(unmatched, fname)
+    }else{
+      message("All country names converted")
     }
-    export(unmatched, fname)
-  }else{
-    message("All country names converted")
   }
+
   return(y)
 }
