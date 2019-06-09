@@ -102,8 +102,7 @@ hdb_get = function(vars, host = NULL, password = NULL){
 #' @examples
 #' #need 4 column data frame, iso3c, variablename, year, value
 #'
-#' @export
-hcountry_spelling = function(df, host = NULL, password = NULL){
+hcountryspelling = function(df, host = NULL, password = NULL){
   con = hdb_connect("master", host = host, password = password)
   tmp = dbReadTable(con, "country_spelling")
   df = left_join(df, tmp)
@@ -119,8 +118,7 @@ hcountry_spelling = function(df, host = NULL, password = NULL){
 #' @examples
 #' #need 4 column data frame, iso3c, variablename, year, value
 #'
-#' @export
-hcountry_info = function(df, host = NULL, password = NULL){
+hcountryinfo = function(df, host = NULL, password = NULL){
   con = hdb_connect("master", host = host, password = password)
   tmp = dbReadTable(con, "country_info")
   df = left_join(df, tmp)
