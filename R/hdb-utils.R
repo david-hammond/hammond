@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
 hdb_connect = function(db = "postgres",
@@ -33,7 +33,7 @@ hdb_connect = function(db = "postgres",
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
 hdb_get_toc = function(db = "master", host = NULL, password = NULL){
@@ -49,7 +49,7 @@ hdb_get_toc = function(db = "master", host = NULL, password = NULL){
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
 hdb_search = function(vars, db = "master", host = NULL, password = NULL){
@@ -66,7 +66,7 @@ hdb_search = function(vars, db = "master", host = NULL, password = NULL){
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
 hdb_get = function(vars, host = NULL, password = NULL){
@@ -81,16 +81,12 @@ hdb_get = function(vars, host = NULL, password = NULL){
     tmp$year = as.numeric(tmp$year)
     tmp$seriescode = as.character(tmp$seriescode)
     tmp = left_join(tmp, key)
-    tmp = tmp %>% select(iso3c, variablename, year, value, source)
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, source, last_updated)
     dbDisconnect(con)
     return(tmp)
   }
   tmp = pblapply(unique(vars), db.get)
   tmp = bind_rows(tmp)
-  if("national" %in% tmp$geolevel){
-    tmp = hcountry_spelling(tmp, host = host, password = password)
-    tmp = hcountry_info(tmp, host = host, password = password)
-  }
   return(tmp)
 }
 #' hcountry_spelling
@@ -100,7 +96,7 @@ hdb_get = function(vars, host = NULL, password = NULL){
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 hcountryspelling = function(df, host = NULL, password = NULL){
   con = hdb_connect("master", host = host, password = password)
@@ -116,7 +112,7 @@ hcountryspelling = function(df, host = NULL, password = NULL){
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' #need 4 column data frame, geocode, variablename, year, value
 #'
 hcountryinfo = function(df, host = NULL, password = NULL){
   con = hdb_connect("master", host = host, password = password)
