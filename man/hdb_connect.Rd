@@ -4,9 +4,8 @@
 \alias{hdb_connect}
 \title{hdb_connect}
 \usage{
-hdb_connect(db = "postgres", host = my.name <- readline(prompt =
-  "Enter database ip address: "), port = 5432, user = "postgres",
-  password = my.name <- readline(prompt = "Enter database password: "))
+hdb_connect(db = "postgres", port = 5432, user = "postgres", host,
+  password)
 }
 \arguments{
 \item{countries}{list of countries}
