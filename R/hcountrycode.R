@@ -9,7 +9,7 @@
 #'
 #' @export
 
-hcountrycode = function(x, source_file = NA)
+hcountrycode = function(x, source_file = whereami::thisfile())
 {
   require(countrycode)
   require(rio)
