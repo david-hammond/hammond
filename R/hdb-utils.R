@@ -11,18 +11,23 @@
 hdb_connect = function(db = "postgres",
                        port = 5432,
                        user = "postgres",
-                       host = Sys.getenv("DB_HOST"),
-                       password = Sys.getenv("DB_PASSWORD")){
+                       host = NULL,
+                       password = NULL){
   require(RPostgreSQL)
-  if(host == ""){
-    host = readline(prompt="Enter database ip address: ")
-    Sys.setenv(DB_HOST = host)
+  if(is.null(host)){
+    host = Sys.getenv("DB_HOST")
+    if(host == ""){
+      host = readline(prompt="Enter database ip address: ")
+    }
   }
-  if(password == ""){
-    password = readline(prompt="Enter database password: ")
-    Sys.setenv(DB_PASSWORD = password)
+  if(is.null(password)){
+    password = Sys.getenv("DB_PASSWORD")
+    if(password == ""){
+      password = readline(prompt="Enter database password: ")
+    }
   }
-
+  Sys.setenv(DB_HOST = host)
+  Sys.setenv(DB_PASSWORD = password)
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv, dbname = db,
                    host = host, port = port,
