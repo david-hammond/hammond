@@ -10,7 +10,6 @@ Encoding: UTF-8
 Depends:
   R (>= 3.6.0),
   tidyverse (>= 1.2.1),
-  lubridate (>= 1.7.4),
   countrycode (>= 1.1.0),
   RPostgreSQL (>= 0.6.2),
   whereami (>= 0.1.8.1),
@@ -18,7 +17,6 @@ Depends:
   processx (>= 3.3.1),
   fs (>= 1.3.1),
   devtools (>= 2.0.2),
-  pbapply (>= 1.4-0),
-  rio (>= 0.5.16)
+  pbapply (>= 1.4-0)
 LazyData: true
 RoxygenNote: 6.1.1
