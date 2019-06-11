@@ -9,7 +9,7 @@ License: GPL-3
 Encoding: UTF-8
 Depends:
   R (>= 3.5.0),
-  tidyverse (>= 0.7.8)
+  tidyverse (>= 1.2.1)
 Imports:
   lubridate (>= 1.7.4),
   countrycode (>= 1.1.0),

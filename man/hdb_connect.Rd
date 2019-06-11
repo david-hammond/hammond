@@ -5,7 +5,7 @@
 \title{hdb_connect}
 \usage{
 hdb_connect(db = "postgres", port = 5432, user = "postgres",
-  host = Sys.getenv("DB_HOST"), password = Sys.getenv("DB_PASSWORD"))
+  host = NULL, password = NULL)
 }
 \arguments{
 \item{countries}{list of countries}
