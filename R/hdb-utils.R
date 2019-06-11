@@ -14,7 +14,7 @@ hdb_connect = function(db = "postgres",
                        host = Sys.getenv("DB_HOST"),
                        password = Sys.getenv("DB_PASSWORD")){
   require(RPostgreSQL)
-  if(host = ""){
+  if(host == ""){
     host = readline(prompt="Enter database ip address: ")
     Sys.setenv(DB_HOST = host)
   }

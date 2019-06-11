@@ -13,6 +13,6 @@ hcountryspelling(df, host = NULL, password = NULL)
 This function calculates correlations between variables
 }
 \examples{
-#need 4 column data frame, iso3c, variablename, year, value
+#need 4 column data frame, geocode, variablename, year, value
 
 }

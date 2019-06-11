@@ -4,8 +4,8 @@
 \alias{hdb_connect}
 \title{hdb_connect}
 \usage{
-hdb_connect(db = "postgres", port = 5432, user = "postgres", host,
-  password)
+hdb_connect(db = "postgres", port = 5432, user = "postgres",
+  host = Sys.getenv("DB_HOST"), password = Sys.getenv("DB_PASSWORD"))
 }
 \arguments{
 \item{countries}{list of countries}
@@ -14,6 +14,6 @@ hdb_connect(db = "postgres", port = 5432, user = "postgres", host,
 This function calculates correlations between variables
 }
 \examples{
-#need 4 column data frame, iso3c, variablename, year, value
+#need 4 column data frame, geocode, variablename, year, value
 
 }

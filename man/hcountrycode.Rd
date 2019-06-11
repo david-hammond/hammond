@@ -4,7 +4,7 @@
 \alias{hcountrycode}
 \title{hcountrycode}
 \usage{
-hcountrycode(x)
+hcountrycode(x, source_file = whereami::thisfile())
 }
 \arguments{
 \item{countries}{list of countries}

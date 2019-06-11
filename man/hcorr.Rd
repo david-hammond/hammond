@@ -7,7 +7,7 @@
 hcorr(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
 }
 \arguments{
-\item{df}{name of dataframe to use for correlation, needs to be long format 4 column data frame: iso3c, variablename, year, value}
+\item{df}{name of dataframe to use for correlation, needs to be long format 4 column data frame: geocode, variablename, year, value}
 
 \item{min.pairs}{minimum number of pairs to correlate}
 
@@ -19,6 +19,6 @@ hcorr(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE)
 This function calculates correlations between variables
 }
 \examples{
-#need 4 column data frame, iso3c, variablename, year, value
+#need 4 column data frame, geocode, variablename, year, value
 
 }
