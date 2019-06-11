@@ -1,4 +1,4 @@
-#' hdb_connect
+#' hdb_login
 #'
 #' This function calculates correlations between variables
 #'
@@ -8,11 +8,8 @@
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-hdb_connect = function(db = "postgres",
-                       port = 5432,
-                       user = "postgres",
-                       host = NULL,
-                       password = NULL){
+hdb_login = function(host = NULL,
+                     password = NULL){
   require(RPostgreSQL)
   if(is.null(host)){
     host = Sys.getenv("DB_HOST")
@@ -28,6 +25,29 @@ hdb_connect = function(db = "postgres",
   }
   Sys.setenv(DB_HOST = host)
   Sys.setenv(DB_PASSWORD = password)
+  return(NULL)
+}
+#' hdb_connect
+#'
+#' This function calculates correlations between variables
+#'
+#' @param countries list of countries
+#'
+#' @examples
+#' #need 4 column data frame, geocode, variablename, year, value
+#'
+#' @export
+hdb_connect = function(db = "postgres",
+                       port = 5432,
+                       user = "postgres"){
+  require(RPostgreSQL)
+  host = Sys.getenv("DB_HOST")
+  password = Sys.getenv("DB_PASSWORD")
+  if(host == ""){
+    hdb_login()
+  }
+  host = Sys.getenv("DB_HOST")
+  password = Sys.getenv("DB_PASSWORD")
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv, dbname = db,
                    host = host, port = port,
