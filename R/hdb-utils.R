@@ -64,8 +64,8 @@ hdb_connect = function(db = "postgres",
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-hdb_get_toc = function(db = "master", host = NULL, password = NULL){
-  con <- hdb_connect(db, host = host, password = password)
+hdb_get_toc = function(db = "master"){
+  con <- hdb_connect(db)
   key = dbReadTable(con, "key")
   dbDisconnect(con)
   return(key)
@@ -80,8 +80,8 @@ hdb_get_toc = function(db = "master", host = NULL, password = NULL){
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-hdb_search = function(vars, db = "master", host = NULL, password = NULL){
-  con <- hdb_connect(db, host = host, password = password)
+hdb_search = function(vars, db = "master"){
+  con <- hdb_connect(db)
   key = dbReadTable(con, "key")
   key = key[grep(tolower(vars), tolower(key$variablename)),]
   dbDisconnect(con)
@@ -97,12 +97,12 @@ hdb_search = function(vars, db = "master", host = NULL, password = NULL){
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-hdb_get = function(vars, host = NULL, password = NULL){
+hdb_get = function(vars){
   db_get = function(id){
     print(id)
-    key = hdb_get_toc(host = host, password = password)
+    key = hdb_get_toc()
     key = key %>% filter(variablename == id)
-    con <- hdb_connect(key$db[1], host = host, password = password)
+    con <- hdb_connect(key$db[1])
     tmp = dbReadTable(con, key$tablename[1])
     tmp = tmp %>% filter(seriescode == key$seriescode[1])
     tmp$value = as.numeric(tmp$value)
@@ -126,8 +126,8 @@ hdb_get = function(vars, host = NULL, password = NULL){
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
-hcountryspelling = function(df, host = NULL, password = NULL){
-  con = hdb_connect("master", host = host, password = password)
+hcountryspelling = function(df){
+  con = hdb_connect("master")
   tmp = dbReadTable(con, "country_spelling")
   df = left_join(df, tmp)
   dbDisconnect(con)
@@ -142,8 +142,8 @@ hcountryspelling = function(df, host = NULL, password = NULL){
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
-hcountryinfo = function(df, host = NULL, password = NULL){
-  con = hdb_connect("master", host = host, password = password)
+hcountryinfo = function(df){
+  con = hdb_connect("master")
   tmp = dbReadTable(con, "country_info")
   df = left_join(df, tmp)
   dbDisconnect(con)

@@ -4,7 +4,7 @@
 \alias{hcountryinfo}
 \title{hcountry_info}
 \usage{
-hcountryinfo(df, host = NULL, password = NULL)
+hcountryinfo(df)
 }
 \arguments{
 \item{countries}{list of countries}

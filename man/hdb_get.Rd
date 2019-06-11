@@ -4,7 +4,7 @@
 \alias{hdb_get}
 \title{hdb_get}
 \usage{
-hdb_get(vars, host = NULL, password = NULL)
+hdb_get(vars)
 }
 \arguments{
 \item{countries}{list of countries}

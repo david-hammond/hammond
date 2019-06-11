@@ -4,7 +4,7 @@
 \alias{hcountryspelling}
 \title{hcountry_spelling}
 \usage{
-hcountryspelling(df, host = NULL, password = NULL)
+hcountryspelling(df)
 }
 \arguments{
 \item{countries}{list of countries}
