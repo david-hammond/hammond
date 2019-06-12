@@ -46,6 +46,7 @@ hdb_create_db = function(db){
 #'
 #' @export
 hdb_update_master = function(){
+  require(uuid)
   con = hdb_connect()
   dbs = dbGetQuery(con, "SELECT datname FROM pg_database
   WHERE datistemplate = false;")
@@ -57,6 +58,7 @@ hdb_update_master = function(){
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
     key = key %>% select(seriescode, geolevel, variablename, description, units, age, sex, source, tablename, last_updated)
+    key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
     key$db = db
     master_key = rbind(master_key, key)
     dbDisconnect(con)

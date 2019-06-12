@@ -105,11 +105,12 @@ hdb_get = function(vars){
     con <- hdb_connect(key$db[1])
     tmp = dbReadTable(con, key$tablename[1])
     tmp = tmp %>% filter(seriescode == key$seriescode[1])
+    tmp$db = key$db[1]
     tmp$value = as.numeric(tmp$value)
     tmp$year = as.numeric(tmp$year)
     tmp$seriescode = as.character(tmp$seriescode)
     tmp = left_join(tmp, key)
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, source, last_updated)
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, source, db, last_updated)
     dbDisconnect(con)
     return(tmp)
   }
