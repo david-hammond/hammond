@@ -57,7 +57,7 @@ hdb_update_master = function(){
     con <- hdb_connect(db)
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
-    key = key %>% select(seriescode, geolevel, variablename, description, units, age, sex, source, tablename, last_updated)
+    key = key %>% select(seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, last_updated)
     key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
     key$db = db
     master_key = rbind(master_key, key)
