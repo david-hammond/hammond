@@ -1,4 +1,4 @@
-#' hdb_login
+#' hdb_kill
 #'
 #' This function calculates correlations between variables
 #'
@@ -8,7 +8,7 @@
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-dbkill = function(){
+hdbkill = function(){
   all_cons <- dbListConnections(dbDriver("PostgreSQL"))
   for(con in all_cons)
     dbDisconnect(con)
