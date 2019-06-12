@@ -99,7 +99,6 @@ hdb_search = function(vars, db = "master"){
 #' @export
 hdb_get = function(vars){
   db_get = function(id){
-    print(id)
     key = hdb_get_toc()
     key = key %>% filter(variablename == id)
     con <- hdb_connect(key$db[1])
@@ -114,7 +113,7 @@ hdb_get = function(vars){
     dbDisconnect(con)
     return(tmp)
   }
-  tmp = lapply(unique(vars), db_get)
+  tmp = pblapply(unique(vars), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }
