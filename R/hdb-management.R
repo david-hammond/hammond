@@ -64,7 +64,7 @@ hdb_update_master = function(){
     dbDisconnect(con)
   }
   db = "master"
-  con = hdb_create(db)
+  con = hdb_create_db(db)
   dbWriteTable(con, "key", master_key, overwrite = T, row.names = F)
   dbDisconnect(con)
 }
