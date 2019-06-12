@@ -57,7 +57,9 @@ hdb_update_master = function(){
     con <- hdb_connect(db)
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
-    key = key %>% select(seriescode, geolevel, variablename, description, units, age, sex, source, tablename, last_updated)
+
+    key = key %>% select(seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, last_updated)
+    key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
     key$db = db
     key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
     # for (tab in key$tablename){
@@ -69,7 +71,7 @@ hdb_update_master = function(){
     dbDisconnect(con)
   }
   db = "master"
-  con = hdb_create(db)
+  con = hdb_create_db(db)
   dbWriteTable(con, "key", master_key, overwrite = T, row.names = F)
   dbDisconnect(con)
 }

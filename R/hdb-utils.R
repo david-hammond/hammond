@@ -110,7 +110,7 @@ hdb_get = function(vars){
     tmp$year = as.numeric(tmp$year)
     tmp$seriescode = as.character(tmp$seriescode)
     tmp = left_join(tmp, key)
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, source, db, last_updated)
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated)
     dbDisconnect(con)
     return(tmp)
   }
