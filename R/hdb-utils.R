@@ -113,7 +113,7 @@ hdb_get = function(vars){
     dbDisconnect(con)
     return(tmp)
   }
-  tmp = pblapply(unique(vars), db_get)
+  tmp = lapply(unique(vars), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }

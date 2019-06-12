@@ -31,7 +31,7 @@ hdb_create_db = function(db){
   query = paste("CREATE DATABASE", db)
   dbSendQuery(con, query)
   dbDisconnect(con)
-  con <- db_connect(db)
+  con <- hdb_connect(db)
   return(con)
 }
 
@@ -46,14 +46,14 @@ hdb_create_db = function(db){
 #'
 #' @export
 hdb_update_master = function(){
-  con = db_connect()
+  con = hdb_connect()
   dbs = dbGetQuery(con, "SELECT datname FROM pg_database
   WHERE datistemplate = false;")
   dbDisconnect(con)
   dbs = dbs %>% filter(!(datname %in% c("postgres", "master")))
   master_key = NULL
   for (db in dbs$datname){
-    con <- db_connect(db)
+    con <- hdb_connect(db)
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
     key = key %>% select(seriescode, geolevel, variablename, description, units, age, sex, source, tablename, last_updated)
@@ -62,7 +62,7 @@ hdb_update_master = function(){
     dbDisconnect(con)
   }
   db = "master"
-  con = db_create(db)
+  con = hdb_create(db)
   dbWriteTable(con, "key", master_key, overwrite = T, row.names = F)
   dbDisconnect(con)
 }
