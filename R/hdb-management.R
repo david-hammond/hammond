@@ -55,7 +55,7 @@ hdb_update_master = function(){
   dbDisconnect(con)
   dbs = dbs %>% filter(!(datname %in% c("postgres", "master")))
   master_key = NULL
-  db_idnex = function(db){
+  db_index = function(db){
     con <- hdb_connect(db)
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
