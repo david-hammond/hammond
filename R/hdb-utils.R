@@ -127,13 +127,7 @@ hdb_get = function(vars){
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
-hcountryspelling = function(df){
-  con = hdb_connect("master")
-  tmp = dbReadTable(con, "country_spelling")
-  df = left_join(df, tmp)
-  dbDisconnect(con)
-  return(df)
-}
+
 #' hcountry_info
 #'
 #' This function calculates correlations between variables
@@ -144,9 +138,6 @@ hcountryspelling = function(df){
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 hcountryinfo = function(df){
-  con = hdb_connect("master")
-  tmp = dbReadTable(con, "country_info")
-  df = left_join(df, tmp)
-  dbDisconnect(con)
+  df = left_join(df, countryinfo)
   return(df)
 }

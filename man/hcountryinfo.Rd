@@ -2,17 +2,25 @@
 % Please edit documentation in R/hdb-utils.R
 \name{hcountryinfo}
 \alias{hcountryinfo}
-\title{hcountry_info}
+\title{hcountry_spelling}
 \usage{
 hcountryinfo(df)
 }
 \arguments{
+\item{countries}{list of countries}
+
 \item{countries}{list of countries}
 }
 \description{
 This function calculates correlations between variables
 }
 \examples{
+#need 4 column data frame, geocode, variablename, year, value
+
+hcountry_info
+
+This function calculates correlations between variables
+
 #need 4 column data frame, geocode, variablename, year, value
 
 }
