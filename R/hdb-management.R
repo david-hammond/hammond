@@ -47,6 +47,7 @@ hdb_create_db = function(db){
 #' @export
 hdb_update_master = function(){
   require(uuid)
+  require(tidyverse)
   con = hdb_connect()
   dbs = dbGetQuery(con, "SELECT datname FROM pg_database
   WHERE datistemplate = false;")
