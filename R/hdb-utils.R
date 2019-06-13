@@ -25,7 +25,12 @@ hdb_login = function(host = NULL,
   }
   Sys.setenv(DB_HOST = host)
   Sys.setenv(DB_PASSWORD = password)
-  return(NULL)
+  con = try(hdb_connect())
+  if(class(con) != "try-error"){
+    message("SUCCESS")
+  }else{
+    message("Credentials failed")
+  }
 }
 #' hdb_connect
 #'
