@@ -64,7 +64,7 @@ hdb_update_master = function(){
     key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, db, last_updated)
     for (tab in key$tablename){
       tmp = dbReadTable(con, tab)
-      tmp = tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value)
+      tmp = suppressMessages(tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value))
       dbWriteTable(con, tab, tmp, overwrite = T)
     }
     master_key = rbind(master_key, key)
