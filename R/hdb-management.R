@@ -48,28 +48,29 @@ hdb_create_db = function(db){
 hdb_update_master = function(){
   require(uuid)
   require(tidyverse)
+  require(pblapply)
   con = hdb_connect()
   dbs = dbGetQuery(con, "SELECT datname FROM pg_database
   WHERE datistemplate = false;")
   dbDisconnect(con)
   dbs = dbs %>% filter(!(datname %in% c("postgres", "master")))
   master_key = NULL
-  for (db in dbs$datname){
+  db_idnex = function(db){
     con <- hdb_connect(db)
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
     key$db = db
     key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
     key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, db, last_updated)
-
     for (tab in key$tablename){
-       tmp = dbReadTable(con, tab)
-       tmp = tmp %>% left_join(key %>% select(uid, seriescode), tmp) %>% select(uid, geocode, variablename, value)
-       dbWriteTable(con, tab, tmp, overwrite = T)
+      tmp = dbReadTable(con, tab)
+      tmp = tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value)
+      dbWriteTable(con, tab, tmp, overwrite = T)
     }
     master_key = rbind(master_key, key)
     dbDisconnect(con)
   }
+  pblapply(dbs$datname, db_index)
   db = "master"
   con = hdb_create_db(db)
   dbWriteTable(con, "key", master_key, overwrite = T, row.names = F)
