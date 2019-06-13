@@ -77,8 +77,8 @@ hdb_update_master = function(){
   con = hdb_create_db(db)
   tab = "key"
   dbWriteTable(con, tab, master_key, overwrite = T, row.names = F)
-  #query = paste0('ALTER TABLE ', tab, ' ADD CONSTRAINT id_', tab,
-  #               '_pk PRIMARY KEY ("uid");')
+  query = paste0('ALTER TABLE ', tab, ' ADD CONSTRAINT id_', tab,
+                 '_pk PRIMARY KEY ("uid");')
   dbGetQuery(con, query)
   dbDisconnect(con)
 }
