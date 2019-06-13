@@ -108,7 +108,7 @@ hdb_get = function(vars){
     key = hdb_get_toc()
     key = key %>% filter(variablename == id)
     all = NULL
-    for (i in 1:nrow(key$db)){
+    for (i in 1:nrow(key)){
       con <- hdb_connect(key$db[i])
       tmp = dbReadTable(con, key$tablename[i])
       tmp = tmp %>% filter(uid == key$uid[i])
