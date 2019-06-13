@@ -49,6 +49,7 @@ hdb_update_master = function(){
   require(uuid)
   require(tidyverse)
   require(pbapply)
+  message("Indexing database, may take a while")
   con = hdb_connect()
   dbs = dbGetQuery(con, "SELECT datname FROM pg_database
   WHERE datistemplate = false;")
@@ -73,6 +74,10 @@ hdb_update_master = function(){
   pblapply(dbs$datname, db_index)
   db = "master"
   con = hdb_create_db(db)
-  dbWriteTable(con, "key", master_key, overwrite = T, row.names = F)
+  tab = "key"
+  dbWriteTable(con, tab, master_key, overwrite = T, row.names = F)
+  query = paste0('ALTER TABLE ', tab, ' ADD CONSTRAINT id_', tab,
+                 '_pk PRIMARY KEY ("uid");')
+  dbGetQuery(con, query)
   dbDisconnect(con)
 }
