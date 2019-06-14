@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' hdb_login("192.168.0.64", password = "peace123")
+#' hdb_login("192.168.0.98", password = "peace123")
 #'
 #' @export
 hdb_login = function(host = NULL,
