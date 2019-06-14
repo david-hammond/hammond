@@ -1,6 +1,6 @@
 #' hcountrycode
 #'
-#' This function calculates correlations between variables
+#' This function replaces country name or code with iso3c country codes. Can also be used in reverse.
 #'
 #' @param countries list of countries
 #'

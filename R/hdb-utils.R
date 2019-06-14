@@ -1,6 +1,6 @@
 #' hdb_login
 #'
-#' This function calculates correlations between variables
+#' This function allows access to a database by entering an IP adress and passcode.
 #'
 #' @param countries list of countries
 #'
@@ -61,7 +61,7 @@ hdb_connect = function(db = "postgres",
 }
 #' hdb_get_toc
 #'
-#' This function calculates correlations between variables
+#' This function retrieves the Table of Contents from a specified database.
 #'
 #' @param countries list of countries
 #'
@@ -79,7 +79,7 @@ hdb_get_toc = function(db = "master"){
 }
 #' hdb_search
 #'
-#' This function calculates correlations between variables
+#' This function searches the database and retrieves specified data.
 #'
 #' @param countries list of countries
 #'
@@ -95,7 +95,7 @@ hdb_search = function(vars, db = "master"){
 }
 #' hdb_get
 #'
-#' This function calculates correlations between variables
+#' This function retrieves and caches data from any source in the database.
 #'
 #' @param countries list of countries
 #'
@@ -132,7 +132,7 @@ hdb_get = function(vars){
 }
 #' haddcountryinfo
 #'
-#' This function calculates correlations between variables
+#' This function adds country specific information to a dataframe by matching countries to country codes.
 #'
 #' @param countries list of countries
 #'
