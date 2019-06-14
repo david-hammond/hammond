@@ -2,7 +2,7 @@
 % Please edit documentation in R/hinterpolate.R
 \name{hinterpolate}
 \alias{hinterpolate}
-\title{Interpolates data}
+\title{hinterpolate}
 \usage{
 hinterpolate(df)
 }

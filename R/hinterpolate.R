@@ -1,12 +1,3 @@
-#' hinterpolate
-#'
-#' This function calculates correlations between variables
-#'
-#' @param countries list of countries
-#'
-#' @examples
-#' #need 4 column data frame, geocode, variablename, year, value
-#'
 interpolate.data <- function(df) {
   # linear interpolation
 
@@ -24,7 +15,7 @@ interpolate.data <- function(df) {
   return(df)
 }
 
-#' Interpolates data
+#' hinterpolate
 #'
 #' This is a wrapper function takes a data frame and fills in
 #' interpolated and extrapolated data for the whole time series
