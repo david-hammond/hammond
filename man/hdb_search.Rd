@@ -7,12 +7,11 @@
 hdb_search(vars, db = "master")
 }
 \arguments{
-\item{countries}{list of countries}
+\item{countries}{list of countries
+
+hdb_login("192.168.0.98", password = "peace123")
+hdb_search("Criminal)}
 }
 \description{
 This function calculates correlations between variables
-}
-\examples{
-#need 4 column data frame, geocode, variablename, year, value
-
 }

@@ -6,7 +6,7 @@
 \alias{hammond-package}
 \title{hammond: some stuff}
 \description{
-Just some useful stuff for me
+Useful funtions
 }
 \section{Installation}{
 

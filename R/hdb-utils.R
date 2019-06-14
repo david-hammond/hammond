@@ -67,6 +67,8 @@ hdb_connect = function(db = "postgres",
 #'
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
+#' hdb_login("192.168.0.98", password = "peace123")
+#' hdb_get_toc()
 #'
 #' @export
 hdb_get_toc = function(db = "master"){
@@ -81,9 +83,8 @@ hdb_get_toc = function(db = "master"){
 #'
 #' @param countries list of countries
 #'
-#' @examples
-#' #need 4 column data frame, geocode, variablename, year, value
-#'
+#' hdb_login("192.168.0.98", password = "peace123")
+#' hdb_search("Criminal)
 #' @export
 hdb_search = function(vars, db = "master"){
   con <- hdb_connect(db)
@@ -100,6 +101,8 @@ hdb_search = function(vars, db = "master"){
 #'
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
+#' hdb_login("192.168.0.98", password = "peace123")
+#' db_get("Perceptions of Criminality Raw")
 #'
 #' @export
 hdb_get = function(vars){
@@ -127,7 +130,7 @@ hdb_get = function(vars){
   tmp = bind_rows(tmp)
   return(tmp)
 }
-#' hcountry_spelling
+#' haddcountryinfo
 #'
 #' This function calculates correlations between variables
 #'
@@ -135,7 +138,7 @@ hdb_get = function(vars){
 #'
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
-#'
+#' hcountryinfo(hcountryexampledata)
 
 #' hcountry_info
 #'
@@ -146,7 +149,7 @@ hdb_get = function(vars){
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
-hcountryinfo = function(df){
-  df = left_join(df, countryinfo)
+haddcountryinfo = function(df){
+  df = left_join(df, hcountryinfo)
   return(df)
 }
