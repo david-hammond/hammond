@@ -12,6 +12,7 @@ hpc_change(all)
 \value{
 Returns a dataframe containing the raw and annual growths in GPI
 for each country
+hpc_change(hcountryexampledata)
 }
 \description{
 This function calculates proportional change in GPI for a country

@@ -7,7 +7,6 @@
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
-#' @export
 interpolate.data <- function(df) {
   # linear interpolation
 
@@ -35,8 +34,8 @@ interpolate.data <- function(df) {
 #' @return Returns list with filled in time series, column yhat is the interpolated value.
 #' Please check original value with yhat column to make sure you are happy with the results
 #'
-#' @examples data(rawdata)
-#' df <- iep.interpolate(rawdata)
+#' @examples
+#' hinterpolate(hcountryexampledata)
 #'
 #' @keywords imputation
 #' @author Dave
@@ -48,6 +47,7 @@ hinterpolate = function(df){
   require(testthat)
   #need to add another variable for entries with only one country-year-car value,
   #interpolate breaks otherwise
+  df = df %>% select(geocode, variablename, year, value)
   if(diff(range(df$year))>0){
     num.years.test = df %>% group_by(geocode, variablename) %>%
       summarise(only.one.yr = min(year) == max(year), year = min(year), value = max(value)) %>%

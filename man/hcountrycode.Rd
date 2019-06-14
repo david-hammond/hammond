@@ -13,6 +13,6 @@ hcountrycode(x, source_file = whereami::thisfile())
 This function calculates correlations between variables
 }
 \examples{
-#need 4 column data frame, iso3c, variablename, year, value
+hcountrycode(hcountryexampledata$geocode)
 
 }

@@ -67,7 +67,7 @@ hdb_update_master = function(){
       print(tab)
       tmp = dbReadTable(con, tab)
       tmp = suppressMessages(tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value))
-      dbWriteTable(con, tab, tmp, overwrite = T)
+      dbWriteTable(con, tab, tmp, overwrite = T, row.names = F)
     }
     dbWriteTable(con, "key", key, overwrite = T, row.names = F)
     dbDisconnect(con)

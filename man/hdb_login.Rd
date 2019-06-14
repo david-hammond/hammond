@@ -13,6 +13,6 @@ hdb_login(host = NULL, password = NULL)
 This function calculates correlations between variables
 }
 \examples{
-#need 4 column data frame, geocode, variablename, year, value
+hdb_login("192.168.0.64", password = "peace123")
 
 }

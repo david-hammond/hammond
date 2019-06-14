@@ -2,17 +2,26 @@
 % Please edit documentation in R/hinterpolate.R
 \name{hinterpolate}
 \alias{hinterpolate}
-\title{hinterpolate}
+\title{Interpolates data}
 \usage{
 hinterpolate(df)
 }
 \arguments{
-\item{countries}{list of countries}
+\item{df}{dataframe in iep format}
+}
+\value{
+Returns list with filled in time series, column yhat is the interpolated value.
+Please check original value with yhat column to make sure you are happy with the results
 }
 \description{
-This function calculates correlations between variables
+This is a wrapper function takes a data frame and fills in
+interpolated and extrapolated data for the whole time series
 }
 \examples{
-#need 4 column data frame, geocode, variablename, year, value
+hinterpolate(hcountryexampledata)
 
 }
+\author{
+Dave
+}
+\keyword{imputation}

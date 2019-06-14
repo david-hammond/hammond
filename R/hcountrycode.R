@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, iso3c, variablename, year, value
+#' hcountrycode(hcountryexampledata$geocode)
 #'
 #' @export
 

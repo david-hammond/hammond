@@ -9,6 +9,8 @@
 #'
 #' @examples
 #' #need 4 column data frame, geocode, variablename, year, value
+#' library(hammond)
+#' corr = hcorr(hcountryexampledata)
 #'
 #' @export
 
@@ -74,5 +76,6 @@ hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
   pos = match(df$variable, variablename2)
   df$variable = variablename[pos]
   df = df %>% dplyr::rename(var1 = variablename, var2 = variable)
+  df = df %>% filter(var1!=var2)
   df
 }

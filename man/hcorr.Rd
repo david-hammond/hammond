@@ -20,5 +20,7 @@ This function calculates correlations between variables
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value
+library(hammond)
+corr = hcorr(hcountryexampledata)
 
 }

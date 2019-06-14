@@ -15,8 +15,7 @@ hclip(obj, size = 4096)
 This function save an object to a clipboard.
 }
 \examples{
-df <- data.frame(a = I("a \\ quote"), b = pi)
-hclip(df)
+hclip(hcountrydata)
 
 }
 \keyword{internal}

@@ -7,6 +7,7 @@
 #'
 #' @return Returns a dataframe containing the raw and annual growths in GPI
 #' for each country
+#' hpc_change(hcountryexampledata)
 #'
 #'
 #' @keywords utilities analysis-utils
@@ -14,7 +15,7 @@
 #' @export
 
 hpc_change <- function(all) {
-  ipak('scales')
+  require('scales')
   all$year = as.numeric(all$year)
   all$value = as.numeric(all$value)
   temp <- expand.grid(geocode = unique(all$geocode), variablename = unique(all$variablename),

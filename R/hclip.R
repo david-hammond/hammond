@@ -5,8 +5,8 @@
 #' @param obj the object to be written to the file
 #' @param size optional argument used for clipping very large objects
 #'
-#' @examples df <- data.frame(a = I("a \ quote"), b = pi)
-#' hclip(df)
+#' @examples
+#' hclip(hcountrydata)
 #'
 #' @keywords utilities internal review
 #' @export

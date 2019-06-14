@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' #need 4 column data frame, geocode, variablename, year, value
+#' hdb_login("192.168.0.64", password = "peace123")
 #'
 #' @export
 hdb_login = function(host = NULL,
