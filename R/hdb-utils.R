@@ -107,6 +107,7 @@ hdb_search = function(vars, db = "master"){
 #' @export
 hdb_get = function(uids){
   require(pbapply)
+  require(tidyverse)
   db_get = function(db){
     tmp <- key %>% filter(db == db)
     con <- hdb_connect(db)
