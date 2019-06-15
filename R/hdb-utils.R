@@ -105,23 +105,27 @@ hdb_search = function(vars, db = "master"){
 #' db_get("Perceptions of Criminality Raw")
 #'
 #' @export
-hdb_get = function(vars){
+hdb_get = function(uids){
   require(pbapply)
-  db_get = function(id){
-    #print(id)
-    key = hdb_get_toc()
-    key = key %>% filter(uid == id)
-    con <- hdb_connect(key$db)
-    tmp = dbReadTable(con, key$uid)
-    tmp$value = as.numeric(tmp$value)
-    tmp$year = as.numeric(tmp$year)
-    tmp$uid = as.character(tmp$uid)
-    tmp = suppressMessages(left_join(tmp, key))
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated_in_db)
+  key = hdb_get_toc()
+  key = key %>% filter(uid %in% uids)
+  db_get = function(db){
+    tmp <- key %>% filter(db == db)
+    con <- hdb_connect(db)
+    all = NULL
+    for (id in unique(tmp$uid)){
+      tmp = dbReadTable(con, id)
+      tmp$value = as.numeric(tmp$value)
+      tmp$year = as.numeric(tmp$year)
+      tmp$uid = as.character(tmp$uid)
+      tmp = suppressMessages(left_join(tmp, key))
+      tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated_in_db)
+      all = rbind(all, tmp)
+    }
     dbDisconnect(con)
-    return(tmp)
+    return(all)
   }
-  tmp = pblapply(unique(vars$uid), db_get)
+  tmp = pblapply(unique(key$db), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }
