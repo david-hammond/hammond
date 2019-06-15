@@ -61,7 +61,7 @@ hdb_update_master = function(){
     key = dbReadTable(con, "key")
     key = key %>% filter(uid %in% dbListTables(con))
     key$db = db
-    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated)
+    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated_in_db)
     dbDisconnect(con)
     return(key)
   }

@@ -117,7 +117,7 @@ hdb_get = function(vars){
     tmp$year = as.numeric(tmp$year)
     tmp$uid = as.character(tmp$uid)
     tmp = suppressMessages(left_join(tmp, key))
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated)
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated_in_db)
     dbDisconnect(con)
     return(tmp)
   }
