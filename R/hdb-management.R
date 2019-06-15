@@ -61,14 +61,7 @@ hdb_update_master = function(){
     key = dbReadTable(con, "key")
     key = key %>% filter(tablename %in% dbListTables(con))
     key$db = db
-    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, db, last_updated)
-    for (tab in key$tablename){
-      print(tab)
-      tmp = dbReadTable(con, tab)
-      tmp = suppressMessages(tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value))
-      dbWriteTable(con, tab, tmp, overwrite = T, row.names = F)
-    }
-    dbWriteTable(con, "key", key, overwrite = T, row.names = F)
+    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated)
     dbDisconnect(con)
     return(key)
   }
