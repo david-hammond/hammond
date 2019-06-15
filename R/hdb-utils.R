@@ -109,24 +109,18 @@ hdb_get = function(vars){
   db_get = function(id){
     print(id)
     key = hdb_get_toc()
-    key = key %>% filter(variablename == id)
-    all = NULL
-    for (i in 1:nrow(key)){
-      con <- hdb_connect(key$db[i])
-      tmp = dbReadTable(con, key$tablename[i])
-      tmp = tmp %>% filter(uid == key$uid[i])
-      tmp$db = key$db[i]
-      tmp$value = as.numeric(tmp$value)
-      tmp$year = as.numeric(tmp$year)
-      tmp$uid = as.character(tmp$uid)
-      tmp = left_join(tmp, key)
-      tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated)
-      dbDisconnect(con)
-      all = rbind(all, tmp)
-    }
-    return(all)
+    key = key %>% filter(uid == id)
+    con <- hdb_connect(key$db)
+    tmp = dbReadTable(con, key$uid)
+    tmp$value = as.numeric(tmp$value)
+    tmp$year = as.numeric(tmp$year)
+    tmp$uid = as.character(tmp$uid)
+    tmp = left_join(tmp, key)
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated)
+    dbDisconnect(con)
+    return(tmp)
   }
-  tmp = lapply(unique(vars), db_get)
+  tmp = lapply(unique(vars$uid), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }
