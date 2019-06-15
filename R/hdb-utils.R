@@ -106,6 +106,7 @@ hdb_search = function(vars, db = "master"){
 #'
 #' @export
 hdb_get = function(vars){
+  require(tidyverse)
   require(pbapply)
   db_get = function(id){
     #print(id)
