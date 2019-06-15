@@ -106,8 +106,9 @@ hdb_search = function(vars, db = "master"){
 #'
 #' @export
 hdb_get = function(vars){
+  require(pbapply)
   db_get = function(id){
-    print(id)
+    #print(id)
     key = hdb_get_toc()
     key = key %>% filter(uid == id)
     con <- hdb_connect(key$db)
@@ -115,12 +116,12 @@ hdb_get = function(vars){
     tmp$value = as.numeric(tmp$value)
     tmp$year = as.numeric(tmp$year)
     tmp$uid = as.character(tmp$uid)
-    tmp = left_join(tmp, key)
+    tmp = suppressMessages(left_join(tmp, key))
     tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated)
     dbDisconnect(con)
     return(tmp)
   }
-  tmp = lapply(unique(vars$uid), db_get)
+  tmp = pblapply(unique(vars$uid), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
 }
