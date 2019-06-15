@@ -27,6 +27,7 @@ hcountrycode = function(x, source_file = whereami::thisfile())
     if(sum(pos) >= 1){
       message("The following countries were not matched, please rename them in your data frame if you know they have an isocode")
       message(paste(unique(x[pos]), collapse = ", "))
+      source_file = ifelse(is.null(source_file), "User Called", source_file)
       unmatched = data.frame(unmatched_countries = unique(x[pos]), script = source_file)
       fname = "unmatched_country_codes.xlsx"
       if(file.exists(fname)){
