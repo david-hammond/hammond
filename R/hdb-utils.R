@@ -107,8 +107,6 @@ hdb_search = function(vars, db = "master"){
 #' @export
 hdb_get = function(uids){
   require(pbapply)
-  key = hdb_get_toc()
-  key = key %>% filter(uid %in% uids)
   db_get = function(db){
     tmp <- key %>% filter(db == db)
     con <- hdb_connect(db)
@@ -125,6 +123,8 @@ hdb_get = function(uids){
     dbDisconnect(con)
     return(all)
   }
+  key = hdb_get_toc()
+  key = key %>% filter(uid %in% uids)
   tmp = pblapply(unique(key$db), db_get)
   tmp = bind_rows(tmp)
   return(tmp)
