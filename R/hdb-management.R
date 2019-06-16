@@ -58,13 +58,14 @@ hdb_update_master = function(){
   db_index = function(db){
     print(db)
     con <- hdb_connect(db)
-    key = dbReadTable(con, "key")
-
-    key = key %>% filter(uid %in% dbListTables(con))
-    key$db = db
-    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated_in_db)
-    dbDisconnect(con)
-    return(key)
+    key = try(dbReadTable(con, "key"))
+    if (class(key) != "try-error"){
+      key = key %>% filter(uid %in% dbListTables(con))
+      key$db = db
+      key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated_in_db)
+      dbDisconnect(con)
+      return(key)
+    }
   }
   master_key = pblapply(dbs$datname, db_index)
   master_key = bind_rows(master_key)
