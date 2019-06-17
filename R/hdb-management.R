@@ -58,20 +58,14 @@ hdb_update_master = function(){
   db_index = function(db){
     print(db)
     con <- hdb_connect(db)
-    key = dbReadTable(con, "key")
-    key = key %>% filter(tablename %in% dbListTables(con))
-    key$db = db
-    key$uid = sapply(seq_along(1:nrow(key)), uuid::UUIDgenerate)
-    key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, tablename, db, last_updated)
-    for (tab in key$tablename){
-      print(tab)
-      tmp = dbReadTable(con, tab)
-      tmp = suppressMessages(tmp %>% left_join(key %>% select(uid, seriescode)) %>% select(uid, geocode, year, value))
-      dbWriteTable(con, tab, tmp, overwrite = T, row.names = F)
+    key = try(dbReadTable(con, "key"))
+    if (class(key) != "try-error"){
+      key = key %>% filter(uid %in% dbListTables(con))
+      key$db = db
+      key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated_in_db)
+      dbDisconnect(con)
+      return(key)
     }
-    dbWriteTable(con, "key", key, overwrite = T, row.names = F)
-    dbDisconnect(con)
-    return(key)
   }
   master_key = pblapply(dbs$datname, db_index)
   master_key = bind_rows(master_key)
