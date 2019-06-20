@@ -4,7 +4,7 @@
 \alias{hdb_connect}
 \title{hdb_connect}
 \usage{
-hdb_connect(db = "postgres", port = 5432, user = "postgres")
+hdb_connect(db = "postgres", port = 5432, user = "guest")
 }
 \arguments{
 \item{countries}{list of countries}

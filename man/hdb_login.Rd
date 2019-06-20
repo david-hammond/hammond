@@ -4,7 +4,7 @@
 \alias{hdb_login}
 \title{hdb_login}
 \usage{
-hdb_login(host = NULL, password = NULL)
+hdb_login(host = NULL, user = NULL, password = NULL)
 }
 \arguments{
 \item{countries}{list of countries}

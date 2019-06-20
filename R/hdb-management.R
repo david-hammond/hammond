@@ -24,7 +24,7 @@ hdbkill = function(){
 #'
 #' @export
 
-hdb_create_db = function(db, user, password){
+hdb_create_db = function(host, db, user, password){
   con = hdb_connect()
   query = paste("DROP DATABASE IF EXISTS", db)
   dbSendQuery(con, query)

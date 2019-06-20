@@ -10,7 +10,7 @@ hdbkill()
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function kills all connections to the database, use as a last resort if you get a db connection error
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value

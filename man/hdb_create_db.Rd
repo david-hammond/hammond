@@ -4,13 +4,13 @@
 \alias{hdb_create_db}
 \title{hdb_create_db}
 \usage{
-hdb_create_db(db)
+hdb_create_db(db, user, password)
 }
 \arguments{
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function creates a database, use only if you know what you are doing
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value

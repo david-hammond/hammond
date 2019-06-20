@@ -5,10 +5,11 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' hdb_login("192.168.0.98", password = "peace123")
+#' hdb_login(host = "192.168.0.98", password = "peace123")
 #'
 #' @export
 hdb_login = function(host = NULL,
+                     db = NULL,
                      user = NULL,
                      password = NULL){
   require(RPostgreSQL)
@@ -18,6 +19,12 @@ hdb_login = function(host = NULL,
       host = readline(prompt="Enter database ip address: ")
     }
   }
+  if(is.null(db)){
+    db = Sys.getenv("DB_NAME")
+    if(user == ""){
+      db = readline(prompt="Enter database db name: ")
+    }
+  }
   if(is.null(user)){
     user = Sys.getenv("DB_USER")
     if(user == ""){
@@ -25,15 +32,15 @@ hdb_login = function(host = NULL,
     }
   }
   if(is.null(password)){
-    pword = paste0("DB_", toupper(user), "_PASSWORD")
-    password = Sys.getenv(pword)
+    password = Sys.getenv("DB_PASSWORD")
     if(password == ""){
       password = readline(prompt="Enter db password: ")
     }
   }
   Sys.setenv(DB_HOST = host)
+  Sys.setenv(DB_NAME = db)
   Sys.setenv(DB_USER = user)
-  Sys.setenv(as.name(pword) = password)
+  Sys.setenv(DB_PASSWORD = password)
   con = try(hdb_connect())
   if(class(con) != "try-error"){
     message("SUCCESS")
@@ -56,13 +63,16 @@ hdb_connect = function(db = "postgres",
                        user = "guest"){
   require(RPostgreSQL)
   host = Sys.getenv("DB_HOST")
-  pword = paste0("DB_", user, "_PASSWORD")
-  password = Sys.getenv(pword)
-  if(host == ""){
+  db = Sys.getenv("DB_NAME")
+  user = Sys.getenv("DB_USER")
+  password = Sys.getenv("DB_PASSWORD")
+  if(host == "" | db == "" | user == "" | password == ""){
     hdb_login()
   }
   host = Sys.getenv("DB_HOST")
-  password = Sys.getenv(pword)
+  db = Sys.getenv("DB_NAME")
+  user = Sys.getenv("DB_USER")
+  password = Sys.getenv("DB_PASSWORD")
   drv <- dbDriver("PostgreSQL")
   con <- dbConnect(drv, dbname = db,
                    host = host, port = port,
