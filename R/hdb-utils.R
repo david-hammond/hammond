@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' hdb_login(host = "192.168.0.98", password = "peace123")
+#' login("192.168.0.64", db = "countrydata", user = "postgres", password = "peace123")
 #'
 #' @export
 hdb_login = function(host = NULL,
@@ -58,9 +58,7 @@ hdb_login = function(host = NULL,
 #' #need 4 column data frame, geocode, variablename, year, value
 #'
 #' @export
-hdb_connect = function(db = "postgres",
-                       port = 5432,
-                       user = "guest"){
+hdb_connect = function(port = 5432){
   require(RPostgreSQL)
   host = Sys.getenv("DB_HOST")
   db = Sys.getenv("DB_NAME")
@@ -91,8 +89,8 @@ hdb_connect = function(db = "postgres",
 #' hdb_get_toc()
 #'
 #' @export
-hdb_get_toc = function(db = "master"){
-  con <- hdb_connect(db)
+hdb_get_toc = function(){
+  con <- hdb_connect()
   key = dbReadTable(con, "key")
   dbDisconnect(con)
   return(key)
@@ -106,11 +104,9 @@ hdb_get_toc = function(db = "master"){
 #' hdb_login("192.168.0.98", password = "peace123")
 #' hdb_search("Criminal)
 #' @export
-hdb_search = function(vars, db = "master"){
-  con <- hdb_connect(db)
-  key = dbReadTable(con, "key")
+hdb_search = function(vars){
+  key = hdb_get_toc()
   key = key[grep(tolower(vars), tolower(key$variablename)),]
-  dbDisconnect(con)
   return(key)
 }
 #' hdb_get
