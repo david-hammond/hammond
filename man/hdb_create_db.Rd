@@ -4,7 +4,7 @@
 \alias{hdb_create_db}
 \title{hdb_create_db}
 \usage{
-hdb_create_db(db, user, password)
+hdb_create_db(host, db, user, password)
 }
 \arguments{
 \item{countries}{list of countries}

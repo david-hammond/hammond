@@ -5,7 +5,7 @@
 #' @param countries list of countries
 #'
 #' @examples
-#' login("192.168.0.64", db = "countrydata", user = "postgres", password = "peace123")
+#' hdb_login("192.168.0.64", db = "countrydata", user = "postgres", password = "peace123")
 #'
 #' @export
 hdb_login = function(host = NULL,
@@ -89,7 +89,7 @@ hdb_connect = function(port = 5432){
 #' hdb_get_toc()
 #'
 #' @export
-hdb_get_toc = function(){
+hdb_toc = function(){
   con <- hdb_connect()
   key = dbReadTable(con, "key")
   dbDisconnect(con)
@@ -105,10 +105,12 @@ hdb_get_toc = function(){
 #' hdb_search("Criminal)
 #' @export
 hdb_search = function(vars){
-  key = hdb_get_toc()
-  key = key[grep(tolower(vars), tolower(key$variablename)),]
+  key = apply(hdb_toc(), 2, tolower)
+  pos = which(matrix(grepl(tolower(vars), key), ncol=ncol(key)), arr.ind=TRUE)
+  key = data.frame(key[pos[1,],], stringsAsFactors = F)
   return(key)
 }
+
 #' hdb_get
 #'
 #' This function retrieves and caches data from any source in the database.
@@ -124,22 +126,20 @@ hdb_search = function(vars){
 hdb_get = function(vars){
   require(tidyverse)
   require(pbapply)
-  db_get = function(id){
+  db_get = function(id, con){
     #print(id)
-    key = hdb_get_toc()
-    key = key %>% filter(uid == id)
-    con <- hdb_connect(key$db)
-    tmp = dbReadTable(con, key$uid)
+    tmp = dbReadTable(con, id)
     tmp$value = as.numeric(tmp$value)
     tmp$year = as.numeric(tmp$year)
     tmp$uid = as.character(tmp$uid)
-    tmp = suppressMessages(left_join(tmp, key))
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, db, last_updated_in_db)
-    dbDisconnect(con)
+    tmp = suppressMessages(left_join(tmp, vars))
+    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, last_updated_in_db)
     return(tmp)
   }
-  tmp = pblapply(unique(vars$uid), db_get)
+  con <- hdb_connect()
+  tmp = pblapply(unique(vars$uid), db_get, con)
   tmp = bind_rows(tmp)
+  dbDisconnect(con)
   return(tmp)
 }
 #' haddcountryinfo

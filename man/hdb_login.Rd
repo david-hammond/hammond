@@ -4,7 +4,7 @@
 \alias{hdb_login}
 \title{hdb_login}
 \usage{
-hdb_login(host = NULL, user = NULL, password = NULL)
+hdb_login(host = NULL, db = NULL, user = NULL, password = NULL)
 }
 \arguments{
 \item{countries}{list of countries}
@@ -13,6 +13,6 @@ hdb_login(host = NULL, user = NULL, password = NULL)
 This function allows access to a database by entering an IP adress and passcode.
 }
 \examples{
-hdb_login("192.168.0.98", password = "peace123")
+hdb_login("192.168.0.64", db = "countrydata", user = "postgres", password = "peace123")
 
 }

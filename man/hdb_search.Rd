@@ -4,7 +4,7 @@
 \alias{hdb_search}
 \title{hdb_search}
 \usage{
-hdb_search(vars, db = "master")
+hdb_search(vars)
 }
 \arguments{
 \item{countries}{list of countries
