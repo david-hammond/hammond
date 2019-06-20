@@ -13,5 +13,5 @@ hdb_login("192.168.0.98", password = "peace123")
 hdb_search("Criminal)}
 }
 \description{
-This function calculates correlations between variables
+This function searches the database and retrieves specified data.
 }

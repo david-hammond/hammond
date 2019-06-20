@@ -12,7 +12,7 @@ haddcountryinfo(df)
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function adds country specific information to a dataframe by matching countries to country codes.
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value

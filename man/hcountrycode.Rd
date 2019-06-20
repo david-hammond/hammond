@@ -10,7 +10,7 @@ hcountrycode(x, source_file = whereami::thisfile())
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function replaces country name or code with iso3c country codes. Can also be used in reverse.
 }
 \examples{
 hcountrycode(hcountryexampledata$geocode)

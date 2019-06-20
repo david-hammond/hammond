@@ -10,7 +10,7 @@ hdb_get(vars)
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function retrieves and caches data from any source in the database.
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value

@@ -10,7 +10,7 @@ hdb_get_toc(db = "master")
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function retrieves the Table of Contents from a specified database.
 }
 \examples{
 #need 4 column data frame, geocode, variablename, year, value

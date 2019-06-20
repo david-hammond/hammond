@@ -10,7 +10,7 @@ hdb_login(host = NULL, password = NULL)
 \item{countries}{list of countries}
 }
 \description{
-This function calculates correlations between variables
+This function allows access to a database by entering an IP adress and passcode.
 }
 \examples{
 hdb_login("192.168.0.98", password = "peace123")

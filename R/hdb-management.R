@@ -1,6 +1,6 @@
 #' hdb_kill
 #'
-#' This function calculates correlations between variables
+#' This function kills all connections to the database, use as a last resort if you get a db connection error
 #'
 #' @param countries list of countries
 #'
@@ -15,7 +15,7 @@ hdbkill = function(){
 }
 #' hdb_create_db
 #'
-#' This function calculates correlations between variables
+#' This function creates a database, use only if you know what you are doing
 #'
 #' @param countries list of countries
 #'
@@ -24,7 +24,7 @@ hdbkill = function(){
 #'
 #' @export
 
-hdb_create_db = function(db){
+hdb_create_db = function(db, user, password){
   con = hdb_connect()
   query = paste("DROP DATABASE IF EXISTS", db)
   dbSendQuery(con, query)
@@ -35,46 +35,3 @@ hdb_create_db = function(db){
   return(con)
 }
 
-#' hdb_update_master
-#'
-#' This function calculates correlations between variables
-#'
-#' @param countries list of countries
-#'
-#' @examples
-#' #need 4 column data frame, geocode, variablename, year, value
-#'
-#' @export
-hdb_update_master = function(){
-  require(uuid)
-  require(tidyverse)
-  require(pbapply)
-  message("Indexing database, may take a while")
-  con = hdb_connect()
-  dbs = dbGetQuery(con, "SELECT datname FROM pg_database
-  WHERE datistemplate = false;")
-  dbDisconnect(con)
-  dbs = dbs %>% filter(!(datname %in% c("postgres", "master")))
-  db_index = function(db){
-    print(db)
-    con <- hdb_connect(db)
-    key = try(dbReadTable(con, "key"))
-    if (class(key) != "try-error"){
-      key = key %>% filter(uid %in% dbListTables(con))
-      key$db = db
-      key = key %>% select(uid, seriescode, geolevel, variablename, description, periodicity, units, age, sex, source, db, last_updated_in_db)
-      dbDisconnect(con)
-      return(key)
-    }
-  }
-  master_key = pblapply(dbs$datname, db_index)
-  master_key = bind_rows(master_key)
-  db = "master"
-  con = hdb_create_db(db)
-  tab = "key"
-  dbWriteTable(con, tab, master_key, overwrite = T, row.names = F)
-  query = paste0('ALTER TABLE ', tab, ' ADD CONSTRAINT id_', tab,
-                 '_pk PRIMARY KEY ("uid");')
-  dbGetQuery(con, query)
-  dbDisconnect(con)
-}
