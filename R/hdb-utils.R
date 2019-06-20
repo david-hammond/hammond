@@ -105,9 +105,11 @@ hdb_toc = function(){
 #' hdb_search("Criminal)
 #' @export
 hdb_search = function(vars){
-  key = apply(hdb_toc(), 2, tolower)
-  pos = which(matrix(grepl(tolower(vars), key), ncol=ncol(key)), arr.ind=TRUE)
-  key = data.frame(key[pos[1,],], stringsAsFactors = F)
+  key = hdb_toc()
+  key1 = apply(key, 2, tolower)
+  key1 = apply(key1, 1, paste0, collapse ="")
+  pos = grep(tolower(vars), key1)
+  key = key[pos,]
   return(key)
 }
 
