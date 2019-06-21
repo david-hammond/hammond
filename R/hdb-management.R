@@ -35,3 +35,36 @@ hdb_create_db = function(host, db, user, password){
   return(con)
 }
 
+
+#' hdb_backup
+#'
+#' This function backsup a database, use only if you know what you are doing
+#'
+#' @param countries list of countries
+#'
+#' @examples
+#' #need 4 column data frame, geocode, variablename, year, value
+#'
+#' @export
+
+hdb_backup = function(host = "192.168.0.98", user = "postgres", password = "peace123"){
+  db = Sys.getenv("DB_NAME")
+  con = hdb_connect()
+  drv <- dbDriver("PostgreSQL")
+  con_backup <- dbConnect(drv, dbname = "postgres",
+                   host = host, port = port,
+                   user = user, password = password)
+  query = paste("DROP DATABASE IF EXISTS", db)
+  dbSendQuery(con_backup, query)
+  query = paste("CREATE DATABASE", db)
+  backup = function(tbl){
+    tmp = dbReadTable(con, tbl)
+    dbWriteTable(con_backup, tbl, tmp, row.names = F)
+  }
+  pblapply(dbListTables(con), backup)
+  dbDisconnect(con)
+  dbDisconnect(con_backup)
+  return(con)
+}
+
+
