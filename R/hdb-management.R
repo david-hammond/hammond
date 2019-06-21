@@ -31,8 +31,7 @@ hdb_create_db = function(host, db, user, password){
   query = paste("CREATE DATABASE", db)
   dbSendQuery(con, query)
   dbDisconnect(con)
-  con <- hdb_connect(db)
-  return(con)
+  return()
 }
 
 
@@ -47,7 +46,7 @@ hdb_create_db = function(host, db, user, password){
 #'
 #' @export
 
-hdb_backup = function(host = "192.168.0.98", user = "postgres", password = "peace123"){
+hdb_backup = function(host = "192.168.0.98", user = "postgres", password = "peace123", port = 5432){
   db = Sys.getenv("DB_NAME")
   con = hdb_connect()
   drv <- dbDriver("PostgreSQL")
