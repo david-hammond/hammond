@@ -3,6 +3,7 @@
 export(hclip)
 export(hcorr)
 export(hcountrycode)
+export(hdb_backup)
 export(hdb_connect)
 export(hdb_create_db)
 export(hdb_get)
