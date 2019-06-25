@@ -91,9 +91,9 @@ hdb_connect = function(port = 5432){
 #' @export
 hdb_toc = function(){
   con <- hdb_connect()
-  key = dbReadTable(con, "key")
+  meta = dbReadTable(con, "meta")
   dbDisconnect(con)
-  return(key)
+  return(meta)
 }
 #' hdb_search
 #'
