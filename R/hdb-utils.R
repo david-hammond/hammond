@@ -132,10 +132,9 @@ hdb_get = function(vars){
     #print(id)
     tmp = dbReadTable(con, id)
     tmp$value = as.numeric(tmp$value)
-    tmp$year = as.numeric(tmp$year)
     tmp$uid = as.character(tmp$uid)
     tmp = suppressMessages(left_join(tmp, vars))
-    tmp = tmp %>% select(geocode, variablename, year, value, units, description, sex, age, periodicity, source, last_updated_in_db)
+    tmp = tmp %>% select(geocode, variablename, date, value, units, description, sex, age, source)
     return(tmp)
   }
   con <- hdb_connect()
