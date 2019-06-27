@@ -134,7 +134,6 @@ hdb_get = function(vars){
     tmp$value = as.numeric(tmp$value)
     tmp$uid = as.character(tmp$uid)
     tmp = suppressMessages(left_join(tmp, vars))
-    tmp = tmp %>% select(geocode, variablename, date, value, units, description, sex, age, source)
     return(tmp)
   }
   con <- hdb_connect()
