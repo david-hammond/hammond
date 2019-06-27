@@ -50,20 +50,21 @@ hdb_backup = function(host = "192.168.0.98", user = "postgres", password = "peac
   db = Sys.getenv("DB_NAME")
   con = hdb_connect()
   drv <- dbDriver("PostgreSQL")
-  con_backup <- dbConnect(drv, dbname = "postgres",
-                   host = host, port = port,
-                   user = user, password = password)
+  con_backup <- dbConnect(drv, dbname = "postgres", host = host,
+                          port = port, user = user, password = password)
   query = paste("DROP DATABASE IF EXISTS", db)
   dbSendQuery(con_backup, query)
   query = paste("CREATE DATABASE", db)
-  backup = function(tbl){
+  dbDisconnect(con_backup)
+  con_backup <- dbConnect(drv, dbname = db, host = host,
+                          port = port, user = user, password = password)
+  backup = function(tbl) {
     tmp = dbReadTable(con, tbl)
     dbWriteTable(con_backup, tbl, tmp, row.names = F)
   }
   pblapply(dbListTables(con), backup)
   dbDisconnect(con)
   dbDisconnect(con_backup)
-  return(con)
 }
 
 
