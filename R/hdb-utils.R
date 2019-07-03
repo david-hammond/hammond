@@ -140,6 +140,7 @@ hdb_get = function(vars){
   tmp = pblapply(unique(vars$uid), db_get, con)
   tmp = bind_rows(tmp)
   dbDisconnect(con)
+  tmp = tmp %>% left_join(hammond::countryinfo)
   return(tmp)
 }
 #' haddcountryinfo
