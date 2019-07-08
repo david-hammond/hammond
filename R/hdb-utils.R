@@ -90,9 +90,13 @@ hdb_connect = function(port = 5432){
 #'
 #' @export
 hdb_toc = function(){
+  require(scales)
   con <- hdb_connect()
   meta = dbReadTable(con, "meta")
   dbDisconnect(con)
+  message("Your table of contents was successfully retrieved...")
+  message(paste("Number of unique indicator names:", comma(length(unique(meta$variablename)))))
+  message(paste("Number of unique indicator, sex and age combinations:", comma(nrow(meta))))
   return(meta)
 }
 #' hdb_search

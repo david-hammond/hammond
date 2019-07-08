@@ -20,6 +20,7 @@ Imports:
   devtools (>= 2.0.2),
   pbapply (>= 1.4-0),
   Hmisc (>= 4.2-0),
-  padr (>= 0.4.2)
+  padr (>= 0.4.2),
+  scales (>= 1.0.0)
 LazyData: true
 RoxygenNote: 6.1.1
