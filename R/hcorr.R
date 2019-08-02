@@ -79,3 +79,62 @@ hcorr <- function(df, min.pairs = 20, verbose = TRUE, filter.by.p = FALSE) {
   df = df %>% filter(var1!=var2)
   df
 }
+
+#' hdb_corr
+#'
+#' This function calculates correlations between variables
+#'
+#' @param df name of dataframe to use for correlation, needs to be long format 4 column data frame: geocode, variablename, year, value
+#'
+#' @examples
+#' #need 4 column data frame, geocode, variablename, year, value
+#' library(hammond)
+#' corr = hcorr(hcountryexampledata)
+#'
+#' @export
+
+hdb_corr <- function(df) {
+  require(Hmisc)
+  require(dplyr)
+  df = df %>% dplyr::group_by(geocode, uid) %>%
+    dplyr::filter(date == max(date)) %>%
+    summarise(value = mean(value)) %>% ungroup() %>%
+    select(uid, geocode, value)
+  df = df %>% spread(uid, value) %>%
+    filter(complete.cases(.))
+  if(nrow(df) > 4){
+    sdev = apply(df[,-1], 2, sd)
+    if (min(sdev) > 0){
+      df = as.matrix(df)
+      df = df[,-1]
+      class(df) = "numeric"
+      pos = is.infinite(as.matrix(df))
+      df[pos] = NA
+      pos = is.nan(as.matrix(df))
+      df[pos] = NA
+      cormatrix = Hmisc::rcorr(df, type = "pearson")
+      format_cormatrix = function(i){
+        df = cormatrix[[i]] %>% as.data.frame() %>%
+          mutate(uid1 = rownames(cormatrix[[i]])) %>%
+          gather(uid2, val, -uid1) %>%
+          mutate(val = round(val, 2))
+        names(df)[3] = i
+        return(df)
+      }
+
+      cormatrix = lapply(names(cormatrix), format_cormatrix)
+
+      df = suppressMessages(cormatrix[[1]] %>% left_join(cormatrix[[2]]) %>%
+                              left_join(cormatrix[[3]]))
+      df = df %>% dplyr::filter(uid1!=uid2)
+      return(df)
+    }else{
+      message("No variation of variables")
+      break
+    }
+
+  }else{
+    message("Not enough Pairs")
+    break
+  }
+}

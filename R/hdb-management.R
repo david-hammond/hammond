@@ -9,6 +9,7 @@
 #'
 #' @export
 hdbkill = function(){
+  require(RPostgreSQL)
   all_cons <- dbListConnections(dbDriver("PostgreSQL"))
   for(con in all_cons)
     dbDisconnect(con)
