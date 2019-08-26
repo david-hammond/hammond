@@ -1,4 +1,4 @@
-#' hfonts
+#' hfont
 #'
 #' This function loads hammond fonts
 #'

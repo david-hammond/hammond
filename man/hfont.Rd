@@ -2,7 +2,7 @@
 % Please edit documentation in R/hfont.R
 \name{hfont}
 \alias{hfont}
-\title{hfonts}
+\title{hfont}
 \usage{
 hfont(libname = find.package("hammond"), pkgname = "hammond")
 }
