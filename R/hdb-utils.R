@@ -138,6 +138,7 @@ hdb_get = function(vars){
     tmp$value = as.numeric(tmp$value)
     tmp$uid = as.character(tmp$uid)
     tmp = suppressMessages(left_join(tmp, vars))
+    tmp$year = lubridate::year(tmp$date)
     return(tmp)
   }
   con <- hdb_connect()
@@ -145,6 +146,9 @@ hdb_get = function(vars){
   tmp = bind_rows(tmp)
   dbDisconnect(con)
   tmp = tmp %>% left_join(hammond::countryinfo)
+  tmp = tmp %>% select(uid, seriescode, variablename, disaggregation, geocode, gpiname, year, date, value, description,
+                 footnote, units, periodicity, income, region, government, include, landlocked, source, num_geos, earliest_yr, latest_yr, sdev, from_file,
+                 from_computer, last_updated_in_db)
   return(tmp)
 }
 #' haddcountryinfo
