@@ -143,7 +143,7 @@ hdb_get = function(vars){
   }
   con <- hdb_connect()
   tmp = pblapply(unique(vars$uid), db_get, con)
-  tmp = bind_rows(tmp)
+  tmp = bind_rows(tmp) %>% distinct()
   dbDisconnect(con)
   tmp = tmp %>% left_join(hammond::countryinfo)
   tmp = tmp %>% select(uid, seriescode, variablename, disaggregation, geocode, gpiname, year, date, value, description,
