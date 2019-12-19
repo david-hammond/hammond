@@ -148,7 +148,7 @@ hdb_get = function(vars){
   tmp = tmp %>% left_join(hammond::countryinfo)
   tmp = tmp %>% select(uid, seriescode, variablename, disaggregation, geocode, gpiname, year, date, value, description,
                  footnote, units, periodicity, income, region, government, include, landlocked, source, num_geos, earliest_yr, latest_yr, sdev, from_file,
-                 from_computer, last_updated_in_db)
+                 from_computer, last_updated_in_db) %>% distinct()
   return(tmp)
 }
 #' haddcountryinfo
