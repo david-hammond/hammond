@@ -35,7 +35,7 @@ hcountrycode = function(x, source_file = whereami::thisfile())
         unmatched = tmp %>% rbind(unmatched) %>%
           distinct()
       }
-      export(unmatched, fname)
+      rio::export(unmatched, fname)
     }else{
       message("All country names converted")
     }
