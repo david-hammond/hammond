@@ -4,8 +4,12 @@
 \alias{hdb_backup}
 \title{hdb_backup}
 \usage{
-hdb_backup(host = "192.168.0.98", user = "postgres",
-  password = "peace123", port = 5432)
+hdb_backup(
+  host = "192.168.0.98",
+  user = "postgres",
+  password = "peace123",
+  port = 5432
+)
 }
 \arguments{
 \item{countries}{list of countries}

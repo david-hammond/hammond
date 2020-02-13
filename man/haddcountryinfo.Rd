@@ -8,8 +8,6 @@ haddcountryinfo(df)
 }
 \arguments{
 \item{countries}{list of countries}
-
-\item{countries}{list of countries}
 }
 \description{
 This function adds country specific information to a dataframe by matching countries to country codes.

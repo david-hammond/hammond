@@ -25,4 +25,4 @@ Imports:
   extrafont (>= 0.17),
   pacman (>= 0.5.1)
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
