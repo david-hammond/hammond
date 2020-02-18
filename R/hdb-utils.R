@@ -145,8 +145,8 @@ hdb_get = function(vars){
   tmp = pblapply(unique(vars$uid), db_get, con)
   tmp = bind_rows(tmp) %>% distinct()
   dbDisconnect(con)
-  tmp = tmp %>% left_join(hammond::countryinfo)
-  tmp = tmp %>% select(uid, seriescode, variablename, disaggregation, geocode, gpiname, year, date, value, description,
+  tmp = tmp %>% left_join(hammond::hcountryinfo)
+  tmp = tmp %>% select(uid, seriescode, variablename, disaggregation, geocode, country, year, date, value, description,
                  footnote, units, periodicity, income, region, government, include, landlocked, source, num_geos, earliest_yr, latest_yr, sdev, from_file,
                  from_computer, last_updated_in_db) %>% distinct()
   return(tmp)
