@@ -1,5 +1,5 @@
-#' countryinfo
+#' hcountryinfo
 #'
-#' countryinfo
+#' hcountryinfo
 "hcountryinfo"
 

@@ -1,0 +1,5 @@
+#' countryinfo
+#'
+#' countryinfo
+"countryinfo"
+
