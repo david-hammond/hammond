@@ -31,7 +31,7 @@ hcountrycode = function(x, source_file = whereami::thisfile())
       unmatched = data.frame(unmatched_countries = unique(x[pos]), script = source_file)
       fname = "unmatched_country_codes.xlsx"
       if(file.exists(fname)){
-        tmp = import(fname)
+        tmp = rio::import(fname)
         unmatched = tmp %>% rbind(unmatched) %>%
           distinct()
       }
