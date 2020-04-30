@@ -33,7 +33,7 @@ hcountrycode = function(x, source_file = whereami::thisfile())
       if(file.exists(fname)){
         tmp = rio::import(fname)
         unmatched = tmp %>% rbind(unmatched) %>%
-          distinct()
+          dplyr::distinct()
       }
       rio::export(unmatched, fname)
     }else{
