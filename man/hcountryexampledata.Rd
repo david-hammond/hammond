@@ -4,7 +4,9 @@
 \name{hcountryexampledata}
 \alias{hcountryexampledata}
 \title{countryinfo}
-\format{An object of class \code{data.frame} with 11934 rows and 5 columns.}
+\format{
+An object of class \code{data.frame} with 11934 rows and 5 columns.
+}
 \usage{
 hcountryexampledata
 }

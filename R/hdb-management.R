@@ -57,10 +57,10 @@ hdb_backup = function(host = "192.168.0.98", user = "postgres", password = "peac
                           port = port, user = user, password = password)
   query = paste("DROP DATABASE IF EXISTS", db)
   dbSendQuery(con_backup, query)
-  dbCommit(con)
+  dbCommit(con_backup)
   query = paste("CREATE DATABASE", db)
   dbSendQuery(con_backup, query)
-  dbCommit(con)
+  dbCommit(con_backup)
   dbDisconnect(con_backup)
   con_backup <- dbConnect(drv, dbname = db, host = host,
                           port = port, user = user, password = password)

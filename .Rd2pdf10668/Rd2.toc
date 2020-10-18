@@ -1,0 +1,9 @@
+\contentsline {subsection}{taliaR-package}{2}{page.2}
+\contentsline {subsection}{alpha\_quotes}{2}{page.2}
+\contentsline {subsection}{andrew}{2}{page.2}
+\contentsline {subsection}{chats\_with\_harry}{3}{page.3}
+\contentsline {subsection}{dave}{3}{page.3}
+\contentsline {subsection}{mohib}{4}{page.4}
+\contentsline {subsection}{nadia}{4}{page.4}
+\contentsline {subsection}{thom\_opinions}{5}{page.5}
+\contentsline {chapter}{Index}{6}{page.6}
