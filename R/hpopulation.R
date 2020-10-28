@@ -19,6 +19,6 @@ hpopulation = function(df){
       mutate(year = as.numeric(year))
 
     df = dplyr::left_join(df, pop_data)
-    df = df %>% select(-year)
+   # df = df %>% select(-year)
     return(df)
 }
