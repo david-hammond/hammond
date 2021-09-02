@@ -137,6 +137,7 @@ hdb_get = function(vars){
     tmp = dbReadTable(con, id)
     tmp$value = as.numeric(tmp$value)
     tmp$uid = as.character(tmp$uid)
+    tmp$date = as.Date(tmp$date)
     tmp = suppressMessages(left_join(tmp, vars))
     tmp$year = lubridate::year(tmp$date)
     return(tmp)
